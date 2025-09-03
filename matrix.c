@@ -12,25 +12,13 @@
 
 typedef char str[100];
 
-/**
- * @struct Matrix
- * @brief A structure representing a matrix with dynamic memory allocation.
- *
- * Contains the name, number of rows, number of columns, and a pointer
- * to the integer array storing the matrix data.
- */
 typedef struct {
-  str name;  /**< Name of the matrix */
-  int row;   /**< Number of rows */
-  int col;   /**< Number of columns */
-  int *data; /**< Pointer to matrix data in row-major order */
+  str name;
+  int row;
+  int col;
+  int *data;
 } Matrix;
 
-/**
- * @brief Prints the contents of a matrix to the standard output.
- *
- * @param m The matrix to read and display.
- */
 void read_data_matrix(Matrix m) {
   printf("info: reading matrix %s\n", m.name);
   for (int i = 0; i < m.row; i++) {
@@ -41,14 +29,6 @@ void read_data_matrix(Matrix m) {
   }
 }
 
-/**
- * @brief Creates a new matrix with a given name and dimensions.
- *
- * @param name The name of the matrix.
- * @param row The number of rows.
- * @param col The number of columns.
- * @return A new Matrix instance with allocated memory initialized to zero.
- */
 Matrix create_matrix(const char *name, int row, int col) {
   Matrix m;
   strcpy(m.name, name);
@@ -60,13 +40,6 @@ Matrix create_matrix(const char *name, int row, int col) {
   return m;
 }
 
-/**
- * @brief Inserts data into a matrix.
- *
- * @param m Pointer to the matrix.
- * @param data Array of integers to insert.
- * @param n Number of elements in the data array.
- */
 void add_data_matrix(Matrix *m, int *data, int n) {
   if (n > m->col * m->row) {
     fprintf(stderr,
@@ -81,12 +54,6 @@ void add_data_matrix(Matrix *m, int *data, int n) {
   }
 }
 
-/**
- * @brief Computes the transpose of a matrix.
- *
- * @param m The input matrix.
- * @return A new matrix that is the transpose of the input.
- */
 Matrix transpose(Matrix m) {
   str n_name;
 
@@ -111,13 +78,6 @@ Matrix transpose(Matrix m) {
   return n_m;
 }
 
-/**
- * @brief Adds two matrices of the same dimensions.
- *
- * @param m1 The first matrix.
- * @param m2 The second matrix.
- * @return A new matrix representing the sum.
- */
 Matrix add(Matrix m1, Matrix m2) {
   if (m1.row != m2.row || m1.col != m2.col) {
     fprintf(stderr,
@@ -138,13 +98,6 @@ Matrix add(Matrix m1, Matrix m2) {
   return m;
 }
 
-/**
- * @brief Subtracts the second matrix from the first.
- *
- * @param m1 The first matrix.
- * @param m2 The second matrix.
- * @return A new matrix representing the difference.
- */
 Matrix sub(Matrix m1, Matrix m2) {
   if (m1.row != m2.row || m1.col != m2.col) {
     fprintf(stderr,
@@ -165,13 +118,6 @@ Matrix sub(Matrix m1, Matrix m2) {
   return m;
 }
 
-/**
- * @brief Multiplies two matrices.
- *
- * @param m1 The first matrix.
- * @param m2 The second matrix.
- * @return A new matrix representing the product.
- */
 Matrix mul(Matrix m1, Matrix m2) {
   if (m1.col != m2.row) {
     fprintf(stderr,
@@ -202,13 +148,6 @@ Matrix mul(Matrix m1, Matrix m2) {
   return m;
 }
 
-/**
- * @brief Multiplies a matrix by a scalar value.
- *
- * @param m The input matrix.
- * @param scalar The scalar multiplier.
- * @return A new matrix with each element multiplied by the scalar.
- */
 Matrix mul_scalar(Matrix m, int scalar) {
   str n_name;
   sprintf(n_name, "%s_Mul_Scalar_%d", m.name, scalar);
@@ -225,11 +164,6 @@ Matrix mul_scalar(Matrix m, int scalar) {
 // TODO: find determinant
 // TODO: linear system
 
-/**
- * @brief Demonstrates matrix operations with test cases.
- *
- * @return int Exit status.
- */
 int main() {
   Matrix matrix = create_matrix("Alpha", 3, 2);
   int data_a[] = {3, 0, -1, 2, 1, 1};
