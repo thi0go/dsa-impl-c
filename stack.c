@@ -126,6 +126,9 @@ bool is_bracket_balance(const char *str) {
       } else {
         return 0;
       }
+    } else {
+      fprintf(stderr, "err: str input must be bracket '() || {} || []'\n");
+      exit(EXIT_FAILURE);
     }
   }
   return 1;
@@ -137,9 +140,9 @@ bool is_bracket_balance(const char *str) {
  * @return int Exit status
  */
 int main() {
-  const char *tests[] = {"()",    "[]",    "{}",    "({[]})", "({(())})",
-                         "",      "(",     ")",     "(()",    "([)]",
-                         "(({})", "({})]", "()[]{}"};
+  const char *tests[] = {"()",    "[]",    "{}",     "({[]})",  "({(())})",
+                         "",      "(",     ")",      "(()",     "([)]",
+                         "(({})", "({})]", "()[]{}", "Halo ges"};
 
   for (int i = 0; i < sizeof(tests) / sizeof(tests[0]); i++) {
     if (is_bracket_balance(tests[i]))
